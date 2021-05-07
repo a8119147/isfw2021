@@ -13,9 +13,29 @@
         function button1Pressed() {
             doSelect();
         }
+        function button2Pressed() {
+            research();
+        }
+
 
         async function doSelect() {
             var sql = 'select * from Tweets order by time desc limit 20';
+            var objects = await osql.connect(sql);
+            console.log(objects);
+            var html = '';
+            html = html + '<ul>';
+            for (var i = 0; i < objects.length; i++) {
+                var object = objects[i];
+                html = html + '<li>' + object.id + ': ' + object.name + ': ' + object.tweet + ': ' + object.time + '</li>';
+            }
+            html = html + '</ul>';
+            document.getElementById('result').innerHTML = html;
+        }
+
+        async function research() {
+            var word = document.getElementById('textfield1').value;
+            word = String(word);
+            var sql = `select * from Tweets where tweet like '%${word}%' `;
             var objects = await osql.connect(sql);
             console.log(objects);
             var html = '';
@@ -35,6 +55,8 @@
     <h1>Tweets</h1>
     <button onclick="button1Pressed()">X</button>
     <hr>
+    <input id='textfield1' type='text'>
+    <button onclick="button2Pressed()">検索</button>
     <p id="result">xxxx</p>
 </body>
 
