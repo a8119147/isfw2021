@@ -10,18 +10,19 @@
     <script type="text/javascript" src="../osql.js"></script>
 
     <script>
+
+        $().ready(function () {
+            doSelect();
+        })
+
         function button1Pressed() {
             doInsert();
             erace();
         }
 
         function button2Pressed() {
-            doSelect();
-        }
-        function button3Pressed() {
             research();
         }
-
 
         async function doInsert() {
             var userid = document.getElementById('tf1').value;
@@ -89,10 +90,8 @@
     tweet:<input id="tf2" type="textfield">
     <button onclick="button1Pressed()">tweet</button>
     <hr>
-    <button onclick="button2Pressed()">X</button>
-    <hr>
     <input id='textfield1' type='text'>
-    <button onclick="button3Pressed()">検索</button>
+    <button onclick="button2Pressed()">検索</button>
     <p id="result"></p>
 </body>
 
