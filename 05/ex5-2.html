@@ -15,6 +15,13 @@
             erace();
         }
 
+        function button2Pressed() {
+            doSelect();
+        }
+        function button3Pressed() {
+            research();
+        }
+
 
         async function doInsert() {
             var userid = document.getElementById('tf1').value;
@@ -30,6 +37,46 @@
         function erace() {
             document.getElementById('tf2').value = " ";
         }
+
+        async function doSelect() {
+            var sql = 'select * from Tweets order by time desc limit 20';
+            var objects = await osql.connect(sql);
+            console.log(objects);
+            var html = '';
+            html = html + "<table border = '1'>";
+            html = html + '<tr>';
+            html = html + '<td>Id</td>' + '<td>name</td>' + '<td>tweet</td>';
+            html = html + '</tr>';
+            for (var i = 0; i < objects.length; i++) {
+                var object = objects[i];
+                html = html + '<tr>';
+                html = html + '<td>' + object.id + '</td>' + '<td>' + object.name + '</td>' + '<td>' + object.tweet + '</td>';
+                html = html + '</tr>';
+            }
+            html = html + '</table>';
+            document.getElementById('result').innerHTML = html;
+        }
+
+        async function research() {
+            var word = document.getElementById('textfield1').value;
+            word = String(word);
+            var sql = `select * from Tweets where tweet like '%${word}%' `;
+            var objects = await osql.connect(sql);
+            console.log(objects);
+            var html = '';
+            html = html + "<table border = '1'>";
+            html = html + '<td>Id</td>' + '<td>name</td>' + '<td>tweet</td>';
+            for (var i = 0; i < objects.length; i++) {
+                var object = objects[i];
+                html = html + '<tr>';
+                html = html + '<td>' + object.id + '</td>' + '<td>' + object.name + '</td>' + '<td>' + object.tweet + '</td>';
+                html = html + '</tr>';
+            }
+            html = html + '</table>';
+            document.getElementById('result').innerHTML = html;
+        }
+
+
     </script>
 
 </head>
@@ -41,7 +88,11 @@
     <br>
     tweet:<input id="tf2" type="textfield">
     <button onclick="button1Pressed()">tweet</button>
-    <br>
+    <hr>
+    <button onclick="button2Pressed()">X</button>
+    <hr>
+    <input id='textfield1' type='text'>
+    <button onclick="button3Pressed()">検索</button>
     <p id="result"></p>
 </body>
 
