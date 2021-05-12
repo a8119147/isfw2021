@@ -12,7 +12,9 @@
     <script>
         function button1Pressed() {
             doInsert();
+            erace();
         }
+
 
         async function doInsert() {
             var userid = document.getElementById('tf1').value;
@@ -23,6 +25,10 @@
             console.log(objects);
 
             document.getElementById('result').innerHTML = "tweetしました";
+        }
+
+        function erace() {
+            document.getElementById('tf2').value = " ";
         }
     </script>
 
