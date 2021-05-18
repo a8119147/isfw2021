@@ -24,6 +24,11 @@
             // console.log(userid);
             location.href = `update.html?userid=${userid}`;
         }
+        function button2Pressed() {
+            var userid = osql.getParam('userid');
+            var username = sessionStorage.getItem('username');
+            location.href = `tweet.html?username=${username}`;
+        }
     </script>
 
 </head>
@@ -33,6 +38,7 @@
     <p id="result"></p>
     <hr>
     <p><button onclick="button1Pressed()">ユーザ情報変更</button></p>
+    <button onclick="button2Pressed()">Tweet</button>
 
 </body>
 
