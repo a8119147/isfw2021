@@ -13,10 +13,16 @@
         $().ready(function () {
             init();
         });
+
         function init() {
             var userid = osql.getParam('userid');
             // console.log('ようこそ' + userid + 'さん');
-            document.getElementById("aaa").innerHTML = 'ようこそ' + userid + 'さん';
+            document.getElementById("result").innerHTML = 'ようこそ' + userid + 'さん';
+        }
+        function button1Pressed() {
+            var userid = osql.getParam('userid');
+            // console.log(userid);
+            location.href = `update.html?userid=${userid}`;
         }
     </script>
 
@@ -24,8 +30,9 @@
 
 <body>
     <h1>ユーザトップ</h1>
-    <p id="aaa"></p>
+    <p id="result"></p>
     <hr>
+    <p><button onclick="button1Pressed()">ユーザ情報変更</button></p>
 
 </body>
 
